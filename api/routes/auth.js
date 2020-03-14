@@ -11,7 +11,7 @@ const router = express();
 passport.use(new Strategy({
   clientID: process.env.GITHUB_CLIENT_ID,
   clientSecret: process.env.GITHUB_CLIENT_SECRET,
-  callbackURL: `http://localhost:3001/github/callback`
+  callbackURL: "http://localhost:3001/auth/github/callback"
 },
 
 function (accessToken, refreshToken, profile, cb) {
@@ -32,11 +32,11 @@ router.get('/github', (req, res, next) => {
 router.get(
   '/github/callback',
   passport.authenticate('github', { failureRedirect: '/login' }), (req, res, next) => {
-    const token = jwt.sign({id: data}, JWT_KEY, {expiresIn: 60 * 60 * 24 * 1000})
+    const token = jwt.sign({id: req.user.id}, JWT_KEY, {expiresIn: 60 * 60 * 24 * 1000})
     req.logIn(req.user, function(err) {
       if (err) return next(err); ;
       res.set('token', token);
-      res.redirect('/profile')
+      res.redirect('http://localhost:3000/')
     });
         
   },

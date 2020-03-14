@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const passport = require('passport');
 require('./db/mongoose');
 
 const app = express();
@@ -15,7 +16,13 @@ app.use((_, res, next) => {
     next();
 })
 
+app.use(passport.initialize());
+
+passport.serializeUser(function (user, cb) {
+  cb(null, user);
+});
+
 app.use('/auth', require('./routes/auth'))
 
 // start server
-app.listen(3001, () => console.log("Server listening on http://localhost:8090"))
+app.listen(3001, () => console.log("Server listening on http://localhost:3001"))
