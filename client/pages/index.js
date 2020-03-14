@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import fetch from 'isomorphic-fetch'
 import { parseCookies } from 'nookies'
 
 const Home = (props) => (
@@ -17,12 +18,22 @@ const Home = (props) => (
   </div>
 )
 
-Home.getInitialProps = (ctx) => {
+async function getUser(authorization) {
+  const res = await fetch('http://localhost:3001/user')
+
+
+  if(res.status === 200) return {authorization, user: res.data}
+  else return {authorization}
+}
+
+Home.getInitialProps = async (ctx) => {
 
   const { authorization } = parseCookies(ctx);
-  return {
-    authorization,
-  };
+  const {token} = ctx.query
+
+  const props = getUser(authorization || token)
+
+  return props;
 }
 
 export default Home

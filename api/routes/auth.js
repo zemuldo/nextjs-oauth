@@ -35,8 +35,7 @@ router.get(
     const token = jwt.sign({id: req.user.id}, JWT_KEY, {expiresIn: 60 * 60 * 24 * 1000})
     req.logIn(req.user, function(err) {
       if (err) return next(err); ;
-      res.set('token', token);
-      res.redirect('http://localhost:3000/')
+      res.redirect(`http://localhost:3000?token=${token}`)
     });
         
   },

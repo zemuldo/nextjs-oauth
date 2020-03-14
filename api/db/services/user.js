@@ -5,7 +5,7 @@ module.exports = {
     try {
       const user = await User.findOne({ oAuthId: oAuthData.id });
       if (!user) {
-        const newUser = new User({oAuthId: oAuthData.id, profilePhotoUrl: profile.photos[0].value});
+        const newUser = new User({oAuthId: oAuthData.id, oAuthData: oAuthData});
         await newUser.save();
         return newUser;
       }

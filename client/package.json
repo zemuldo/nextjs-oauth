@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "isomorphic-fetch": "^2.2.1",
     "next": "9.3.0",
     "nookies": "^2.1.1",
     "react": "16.13.0",

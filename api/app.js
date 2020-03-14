@@ -23,6 +23,7 @@ passport.serializeUser(function (user, cb) {
 });
 
 app.use('/auth', require('./routes/auth'))
+app.use('/user', require('./routes/user'))
 
 // start server
 app.listen(3001, () => console.log("Server listening on http://localhost:3001"))
