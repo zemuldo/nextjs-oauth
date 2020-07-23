@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "isomorphic-fetch": "^2.2.1",
-    "next": "9.3.0",
+    "next": "9.3.2",
     "nookies": "^2.1.1",
     "react": "16.13.0",
     "react-dom": "16.13.0"
