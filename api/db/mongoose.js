@@ -10,9 +10,8 @@ mongoose.connect("mongodb://localhost:27017/next-js-auth",
 const db = mongoose.connection;
 
 db.on('error', (e) => {
-    logger.error(e.toString(), true);
-    logger.error(e.stack, true);
-    process.exit(999);
+    console.error(e.toString(), true);
+    console.error(e.stack, true);
 });
 
 db.once('open', async function () {

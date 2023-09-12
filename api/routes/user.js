@@ -7,7 +7,6 @@ const router = express()
 
 router.use((req, res, next) => {
     const token = req.headers['authorization'];
-
     jwt.verify(token, JWT_KEY, function (err, data) {
         if (err) {
             res.status(401).send({ error: "NotAuthorized" })
@@ -21,7 +20,7 @@ router.use((req, res, next) => {
 router.get('/', async (req, res) => {
     user = await userService.fineById(req.user.id)
 
-    res.send(user);
+    res.json(user);
 })
 
 module.exports = router;

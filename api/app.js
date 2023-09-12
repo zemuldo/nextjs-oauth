@@ -1,9 +1,19 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const passport = require('passport');
+const session = require('express-session')
+
+require('dotenv').config()
 require('./db/mongoose');
 
 const app = express();
+
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}))
 
 // Parse json encoded in the request body
 app.use(bodyParser.json({ limit: '50mb' }));

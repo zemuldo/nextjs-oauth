@@ -14,15 +14,20 @@ const Home = (props) => (
       {
         !props.authorization && <a href={"http://localhost:3001/auth/github"} >Click here to login</a>
       }
+
+      {
+        props.user && <div> <h2>Hi {props.user.oAuthData.displayName}</h2> <img src={props.user.avatar_url} /> </div>
+      }
     </man>
   </div>
 )
 
 async function getUser(authorization) {
   const res = await fetch('http://localhost:3001/user', { headers: { authorization } })
+  const data = await res.json()
 
 
-  if(res.status === 200) return {authorization, user: res.data}
+  if (res.status === 200) return { authorization, user: data }
   else return {authorization}
 }
 
